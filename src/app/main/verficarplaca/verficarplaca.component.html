@@ -1,0 +1,27 @@
+<div style="text-align:center; margin-top: 50px;">
+    <h1>Validación de Placa de Carro</h1>
+    <form (ngSubmit)="onSubmit()" #plateForm="ngForm">
+      <input
+        type="text"
+        name="placa"
+        [(ngModel)]="placa"
+        placeholder="Ingrese la placa"
+        required
+        maxlength="20"
+      />
+      <button type="submit" [disabled]="plateForm.invalid">Validar</button>
+    </form>
+  
+    <div *ngIf="validationResult !== undefined">
+      <div *ngIf="validationResult.valid; else notFound">
+        <h3>¡Placa válida!</h3>
+        <p>Modelo: {{ validationResult.car.model }}</p>
+        <p>Año: {{ validationResult.car.year }}</p>
+      </div>
+  
+      <ng-template #notFound>
+        <h3>{{ validationResult.message }}</h3>
+      </ng-template>
+    </div>
+  </div>
+  
